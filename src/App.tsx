@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Route, Routes } from 'react-router-dom'
+import { RecoilRoot } from 'recoil'
+import styled from 'styled-components'
+import './App.css'
+import Home from './Home'
 
+const queryClient = new QueryClient()
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+        </Routes>
+      </RecoilRoot>
+    </QueryClientProvider>
+  )
 }
 
-export default App;
+export default App
+const Wrapper = styled.section`
+  padding: 4em;
+  background: papayawhip;
+`
